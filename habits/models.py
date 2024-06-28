@@ -14,7 +14,6 @@ class Habit(models.Model):
     PERIODICITY_SELECTION = ((DAILY, 'ежедневно'), (WEEKLY, 'еженедельно'))
     owner = models.ForeignKey(User, verbose_name='Владелец', related_name='habits', on_delete=models.CASCADE,
                               **NULLABLE)
-    name = models.CharField(max_length=100, verbose_name='Название привычки')
     place = models.CharField(max_length=100, verbose_name='Место выполнения привычки', **NULLABLE)
     time = models.TimeField(verbose_name='Время выполнения привычки', **NULLABLE)
     action = models.CharField(max_length=100, verbose_name='Действие привычки')
