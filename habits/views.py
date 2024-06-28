@@ -5,11 +5,11 @@ from habits.models import Habit
 from habits.paginations import HabitPaginator
 from habits.permissions import IsOwner
 from habits.serializers import HabitSerializer
-from habits.service import create_schedule, update_schedule, delete_schedule
+from habits.service import create_schedule, delete_schedule, update_schedule
 
 
 class HabitCreateAPIView(generics.CreateAPIView):
-    """ Создание привычки """
+    """Создание привычки"""
 
     serializer_class = HabitSerializer
     permission_classes = [IsAuthenticated]
@@ -22,7 +22,7 @@ class HabitCreateAPIView(generics.CreateAPIView):
 
 
 class HabitRetrieveAPIView(generics.RetrieveAPIView):
-    """ Просмотр информации об одной привычке """
+    """Просмотр информации об одной привычке"""
 
     serializer_class = HabitSerializer
     queryset = Habit.objects.all()
@@ -30,7 +30,7 @@ class HabitRetrieveAPIView(generics.RetrieveAPIView):
 
 
 class HabitUpdateAPIView(generics.UpdateAPIView):
-    """ Редактирование привычки """
+    """Редактирование привычки"""
 
     serializer_class = HabitSerializer
     queryset = Habit.objects.all()
@@ -43,7 +43,7 @@ class HabitUpdateAPIView(generics.UpdateAPIView):
 
 
 class HabitDestroyAPIView(generics.DestroyAPIView):
-    """ Удаление привычки """
+    """Удаление привычки"""
 
     queryset = Habit.objects.all()
     permission_classes = [IsAuthenticated, IsOwner]
@@ -54,7 +54,7 @@ class HabitDestroyAPIView(generics.DestroyAPIView):
 
 
 class HabitListAPIView(generics.ListAPIView):
-    """ Вывод списка привычек пользователя """
+    """Вывод списка привычек пользователя"""
 
     queryset = Habit.objects.all()
     serializer_class = HabitSerializer
@@ -67,7 +67,7 @@ class HabitListAPIView(generics.ListAPIView):
 
 
 class HabitPublicListAPIView(generics.ListAPIView):
-    """ Вывод списка публичных привычек """
+    """Вывод списка публичных привычек"""
 
     serializer_class = HabitSerializer
     pagination_class = HabitPaginator

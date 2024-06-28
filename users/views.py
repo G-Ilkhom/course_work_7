@@ -1,14 +1,14 @@
 from rest_framework import generics, status
-from rest_framework.permissions import IsAuthenticated, AllowAny, IsAdminUser
+from rest_framework.permissions import AllowAny, IsAdminUser, IsAuthenticated
 from rest_framework.response import Response
 
 from habits.permissions import IsOwner
 from users.models import User
-from users.serializers import UserSerializer, UserRegisterSerializer
+from users.serializers import UserRegisterSerializer, UserSerializer
 
 
 class UserListAPIView(generics.ListAPIView):
-    """ Вывод списка пользователей """
+    """Вывод списка пользователей"""
 
     serializer_class = UserSerializer
     queryset = User.objects.all()
@@ -16,14 +16,14 @@ class UserListAPIView(generics.ListAPIView):
 
 
 class UserRetrieveAPIView(generics.RetrieveAPIView):
-    """ Вывод одного пользователя """
+    """Вывод одного пользователя"""
 
     serializer_class = UserSerializer
     queryset = User.objects.all()
 
 
 class UserUpdateAPIView(generics.UpdateAPIView):
-    """ Редактирование пользователя """
+    """Редактирование пользователя"""
 
     serializer_class = UserSerializer
     queryset = User.objects.all()
@@ -31,14 +31,14 @@ class UserUpdateAPIView(generics.UpdateAPIView):
 
 
 class UserDestroyAPIView(generics.DestroyAPIView):
-    """ Удаление пользователя """
+    """Удаление пользователя"""
 
     queryset = User.objects.all()
     permission_classes = [IsAuthenticated, IsOwner]
 
 
 class UsersRegistrationView(generics.CreateAPIView):
-    """ Регистрация нового пользователя """
+    """Регистрация нового пользователя"""
 
     queryset = User.objects.all()
     serializer_class = UserRegisterSerializer
@@ -48,7 +48,7 @@ class UsersRegistrationView(generics.CreateAPIView):
         data = {}
         if serializer.is_valid():
             serializer.save()
-            data['response'] = True
+            data["response"] = True
             return Response(data, status=status.HTTP_200_OK)
         else:
             data = serializer.errors
