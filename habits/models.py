@@ -10,10 +10,16 @@ NULLABLE = {"blank": True, "null": True}
 class Habit(models.Model):
     """Модель привычки"""
 
-    DAILY = "ежедневно"
-    WEEKLY = "еженедельно"
+    PERIODICITY_SELECTION = [
+        (1, "Ежедневно"),
+        (2, "Каждые 2 дня"),
+        (3, "Каждые 3 дня"),
+        (4, "Каждые 4 дня"),
+        (5, "Каждые 5 дней"),
+        (6, "Каждые 6 дней"),
+        (7, "Еженедельно"),
+    ]
 
-    PERIODICITY_SELECTION = ((DAILY, "ежедневно"), (WEEKLY, "еженедельно"))
     owner = models.ForeignKey(
         User,
         verbose_name="Владелец",
@@ -36,7 +42,7 @@ class Habit(models.Model):
         max_length=20,
         verbose_name="Периодичность привычки",
         choices=PERIODICITY_SELECTION,
-        default=DAILY,
+        default=1,
     )
     reward = models.CharField(max_length=100, verbose_name="Вознаграждение", **NULLABLE)
     time_required = models.DurationField(

@@ -3,7 +3,7 @@ from datetime import timedelta
 from rest_framework.serializers import ValidationError
 
 days = timedelta(days=7)
-time = timedelta(minutes=2)
+time = timedelta(seconds=120)
 
 
 def validator_for_habit(value):
@@ -36,7 +36,8 @@ def validator_for_habit(value):
         pass
 
     try:
-        if not 0 < value["periodicity"] <= days:
+        periodicity = timedelta(days=value["periodicity"])
+        if not timedelta(days=0) < periodicity <= days:
             raise ValidationError(
                 "Привычку можно выполнять не реже, чем 1 раз в 7 дней"
             )
