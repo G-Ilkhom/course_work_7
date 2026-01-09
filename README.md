@@ -1,16 +1,7 @@
-# Курсовая работа №8
-## Инструкция по запуску
-### Клонируйте репозиторий
-```sh
-git clone https://github.com/G-Ilkhom/course_work_7.git
-```
-### Выполните команду
-```sh
-docker-compose up -d --build
-```
-
-## Курсовая работа №7
-### Проект представляет собой трекер полезных привычек, вдохновленный книгой "Атомные привычки" Джеймса Клира.
+# Трекер полезных привычек
+REST API-приложение, предназначенное для поддержки пользователей в достижении целей и формировании полезных привычек.
+Пользователи могут создавать цели и привычки, отслеживать их выполнение и получать награды за регулярность.
+Для повышения вовлечённости пользователей используется интеграция с Telegram Bot API, через который отправляются уведомления и напоминания.
 
 ### Стек технологий
 
@@ -20,49 +11,49 @@ docker-compose up -d --build
 - **Celery**
 - **Poetry**
 - **Postgres**
+- **Docker**
 
 ## Установка и настройка
 
-Для установки проекта выполните следующие шаги:
+### 1. Клонируйте репозиторий:
+```sh
+git clone https://github.com/G-Ilkhom/course_work_7.git
+cd course_work_7
+```
 
-1. Клонируйте репозиторий:
-    ```sh
-    git clone https://github.com/G-Ilkhom/course_work_7.git
-    ```
+### 2. Настройте переменные окружения:
+В корне проекта создайте файл .env и укажите необходимые переменные окружения:
+```sh
+DEBUG=True
+SECRET_KEY=your_secret_key
 
-2. Перейдите в директорию проекта и создайте виртуальное окружение:
-    ```sh
-    cd course_work_7
-    python -m venv venv
-    ```
+POSTGRES_DB=app_db
+POSTGRES_USER=app_user
+POSTGRES_PASSWORD=app_password
+POSTGRES_HOST=db
+POSTGRES_PORT=5432
 
-3. Активируйте виртуальное окружение:
-    - На Windows:
-      ```sh
-      venv\Scripts\activate
-      ```
-    - На Unix или MacOS:
-      ```sh
-      source venv/bin/activate
-      ```
+TELEGRAM_BOT_TOKEN=your_telegram_bot_token
+```
 
-4. Установите зависимости с помощью Poetry:
-    ```sh
-    poetry install
-    ```
+### 3. Соберите Docker-образы и запустите проекта:
+```sh
+docker-compose up -d --build
+```
 
-5. Создайте файл `.env` по образцу `.env.sample` и заполните необходимыми значениями.
+### 4. Проверьте работу приложения
+После успешного запуска:
 
-6. Выполните миграции базы данных:
-    ```sh
-    python manage.py migrate
-    ```
-
-7. Запустите сервер разработки:
-    ```sh
-    python manage.py runserver
-    ```
-8. Запустите Redis локально(на Windows):
-   ```sh
-   celery -A config worker -l INFO -P eventlet
-   ```
+- API доступно по адресу:
+```sh
+http://localhost:8000
+```
+- Административная панель Django:
+```sh
+http://localhost:8000/admin
+```
+### 5. Создайте суперпользователя (опционально)
+Для доступа к административной панели выполните:
+```sh
+docker-compose exec app python manage.py createsuperuser
+```
