@@ -17,8 +17,8 @@ REST API-приложение, предназначенное для подде�
 
 ### 1. Клонируйте репозиторий:
 ```sh
-git clone https://github.com/G-Ilkhom/course_work_7.git
-cd course_work_7
+git clone https://github.com/G-Ilkhom/goal_tracking.git
+cd goal_tracking
 ```
 
 ### 2. Настройте переменные окружения:
